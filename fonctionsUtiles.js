@@ -45,10 +45,4 @@ $(function(){
         myScroll = $(this).scrollTop();
     });
 
-    $(window).resize(function() {
-	});
-
-	$(window).load(function(){
-	});
-
 });

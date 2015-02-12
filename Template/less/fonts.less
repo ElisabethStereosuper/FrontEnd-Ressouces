@@ -1,0 +1,19 @@
+@font-face {
+    font-family: 'font';
+    font-weight: normal;
+    font-style: normal;
+    src: url('../fonts/font.eot');
+    src: url('../fonts/font.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/font.woff') format('woff'),
+         url('../fonts/font.ttf') format('truetype'),
+         url('../fonts/font.svg') format('svg');
+}
+
+.font(@size){
+  font-family: 'font', sans-serif;
+  font-weight: normal;
+  font-size: @size;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
