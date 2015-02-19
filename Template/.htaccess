@@ -70,7 +70,7 @@ Header set Cache-Control "max-age=7200, must-revalidate"
 <filesmatch "\.(pl|php|cgi|spl|scgi|fcgi)$">
 Header unset Cache-Control
 </filesmatch>
-<Ifmodule mod_headers.c>
+</Ifmodule>
 # END Cache-Control Headers
 
 # KILL THEM ETAGS
