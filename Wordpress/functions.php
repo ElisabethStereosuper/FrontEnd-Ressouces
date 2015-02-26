@@ -28,14 +28,11 @@ function remove_comment_author_class( $classes ) {
 add_filter( 'comment_class' , 'remove_comment_author_class' );
 
 /*-----------------------------------------------------------------------------------*/
-/* Détecter s'il s'agit d'un article (exclusion des autres types de post des 
-/* résultats de recherche)
+/* Résultats de recherche: uniquement des articles
 /*-----------------------------------------------------------------------------------*/
 function search_filter($query) {
-  if ( $query->is_main_query() ) {
-    if ($query->is_search) {
-      $query->set('post_type', 'post');
-    }
+  if($query->is_main_query() && $query->is_search){
+    $query->set('post_type', 'post');
   }
 }
 add_action('pre_get_posts','search_filter');
