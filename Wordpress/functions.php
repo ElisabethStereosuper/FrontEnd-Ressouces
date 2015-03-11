@@ -89,6 +89,18 @@ add_action( 'init', 'create_post_type' );
 add_theme_support( 'post-thumbnails' , array('post', 'page')); 
 
 /*-----------------------------------------------------------------------------------*/
+/* Nouvelle taille d'image
+/*-----------------------------------------------------------------------------------*/ 
+function my_image_sizes($sizes){
+    return array_merge( $sizes, array(
+        'custom-thumb' => 'Image custom'
+    ) );
+}
+add_image_size( 'custom-thumb', 200, 200, true ); // true pour cropper
+add_filter('new_image_size', 'my_image_sizes');
+// pour appeler l'url de cette nouvelle image: echo wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'custom-thumb' )[0];
+
+/*-----------------------------------------------------------------------------------*/
 /* Enlever le lien par défaut autour des images
 /*-----------------------------------------------------------------------------------*/
 function wpb_imagelink_setup() {
