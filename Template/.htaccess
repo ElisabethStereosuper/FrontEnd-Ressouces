@@ -83,9 +83,10 @@ order allow,deny
 deny from all
 </files>
 
-<FilesMatch ^wp-config.php$>
+<files wp-config.php>
+order allow,deny
 deny from all
-</FilesMatch>
+</files>
 
 # protection de la lecture des répertoires
 Options -Indexes
