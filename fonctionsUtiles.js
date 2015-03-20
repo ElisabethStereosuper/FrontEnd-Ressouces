@@ -6,7 +6,7 @@ var myScroll;
 function isVisible(elt){
     var botView = myScroll + $(window).height();
     var topElt = elt.offset().top;
-    var botElt = topElt + $(elt).height();
+    var botElt = topElt + elt.height();
     return ((botElt <= botView) && (topElt >= myScroll));
 }
 
