@@ -91,6 +91,9 @@ deny from all
 # protection de la lecture des répertoires
 Options -Indexes
 
+# désactiver la signature serveur
+ServerSignature Off
+
 # prévenir les erreurs liés au format pour la vidéo
 AddType video/ogg ogg ogv
 AddType video/mp4 mp4
