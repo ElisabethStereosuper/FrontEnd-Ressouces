@@ -1,3 +1,13 @@
+html {
+  font-size: 62.5%; /* sets the base font to 10px for easier math */
+}
+
+body {
+  font-size: 16px;
+  font-size: 1.6rem;  
+  /* sets the default sizing to make sure nothing is actually 10px */
+}
+
 /**** Couper un texte par ... ****/
 .shortText{
 	width: 100px;

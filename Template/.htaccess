@@ -1,4 +1,5 @@
 # MOD_DEFLATE COMPRESSION
+<IfModule mod_deflate.c>
 SetOutputFilter DEFLATE
 AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/x-javascript application/x-httpd-php font/opentype application/x-font-ttf
 #Pour les navigateurs incompatibles
@@ -10,6 +11,7 @@ BrowserMatch \bMSI[E] !no-gzip !gzip-only-text/html
 SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png)$ no-gzip
 #les proxies doivent donner le bon contenu
 Header append Vary User-Agent env=!dont-vary
+</IfModule>
 
 # autoriser la compression gzip SI DEFLATE NE FONCIONNE PAS
 <ifModule mod_gzip.c>
@@ -51,15 +53,18 @@ mod_gzip_item_exclude rspheader ^Content-Encoding:.*gzip.*
 
 # BEGIN Cache-Control Headers
 <Ifmodule mod_headers.c>
-<FilesMatch "\.(ico|jpe?g|png|gif|swf|gz|ttf|svg|eot|woff|pdf|mp4|mpeg|avi|svg)$ »>
+BrowserMatch MSIE is-msie
+Header set X-UA-Compatible IE=edge env=is-msie
 Header unset Cookie
 Header unset Set-Cookie
-Header set Cache-Control "max-age=31536000"
+Header unset ETag
 Header set vary "Accept-Encoding"
 Header append vary "User-Agent"
 Header append Cache-Control "public" 
 Header append Connection "Keep-Alive"
 Header append Keep-Alive "timeout=5, max=100"
+<FilesMatch "\.(ico|jpe?g|png|gif|swf|gz|ttf|svg|eot|woff|pdf|mp4|mpeg|avi|svg|woff2)$">
+Header set Cache-Control "max-age=31536000"
 </FilesMatch>
 <filesmatch "\.(css|js)$">
  Header set Cache-Control "max-age=604800, public"
@@ -74,8 +79,10 @@ Header unset Cache-Control
 # END Cache-Control Headers
 
 # KILL THEM ETAGS
-Header unset ETag
 FileETag none
+
+# Use UTF-8 encoding for anything served text/plain or text/html
+AddDefaultCharset utf-8
 
 # protect the htaccess file
 <files .htaccess>
