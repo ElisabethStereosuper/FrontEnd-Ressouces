@@ -55,8 +55,6 @@ mod_gzip_item_exclude rspheader ^Content-Encoding:.*gzip.*
 <Ifmodule mod_headers.c>
 BrowserMatch MSIE is-msie
 Header set X-UA-Compatible IE=edge env=is-msie
-Header unset Cookie
-Header unset Set-Cookie
 Header unset ETag
 Header set vary "Accept-Encoding"
 Header append vary "User-Agent"
@@ -95,6 +93,17 @@ order allow,deny
 deny from all
 </files>
 
+# Block wp-includes folder and files
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteRule ^wp-admin/includes/ - [F,L]
+RewriteRule !^wp-includes/ - [S=3]
+RewriteRule ^wp-includes/[^/]+\.php$ - [F,L]
+RewriteRule ^wp-includes/js/tinymce/langs/.+\.php - [F,L]
+RewriteRule ^wp-includes/theme-compat/ - [F,L]
+</IfModule>
+
 # protection de la lecture des répertoires
 Options -Indexes
 
@@ -105,3 +114,6 @@ ServerSignature Off
 AddType video/ogg ogg ogv
 AddType video/mp4 mp4
 AddType video/webm webm
+
+php_value upload_max_filesize 50M
+php_value post_max_size 50M
