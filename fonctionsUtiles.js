@@ -44,10 +44,15 @@ function shuffle(array) {
   });
 }
 
-/**** Validation email ****/
+/**** Validation email et tel ****/
 function isValidEmail(email) {
     var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
     return pattern.test(email);
+}
+
+function isValidTel(n){
+  var pattern = new RegExp(/^\+?[^.\-][0-9\.\- ]+$/);
+  return pattern.test(n);
 }
 
 /**** Footer toujours en bas de page ****/
@@ -92,7 +97,7 @@ function setToolTip(context){
     }
 }
 
-/**** Slider avec fin et puces ****/
+/**** Slider avec fin et puces (et fleches ou non) ****/
 function setSliderHeight(sliders){
 
     function setHeight(context){
@@ -113,7 +118,7 @@ function setSliderHeight(sliders){
     }
 }
 
-function setCarouselDots(carousel, slides, slideWidth, updateWidth){
+function setCarouselDots(carousel, slides, slideWidth, updateWidth, arrows){
     
     function letSlide(next){
         
@@ -144,10 +149,12 @@ function setCarouselDots(carousel, slides, slideWidth, updateWidth){
             if(activeSlide.prev().length) next = activeSlide.prev().index();
         }
 
-        btnNext.removeClass('none');
-        btnPrev.removeClass('none');
-        if(next === 0) btnPrev.addClass('none');
-        if(next+1 === nbSlides) btnNext.addClass('none');
+        if(arrows){
+            btnNext.removeClass('none');
+            btnPrev.removeClass('none');
+            if(next === 0) btnPrev.addClass('none');
+            if(next+1 === nbSlides) btnNext.addClass('none');
+        }
 
         goToSlide(next);
 
@@ -157,22 +164,25 @@ function setCarouselDots(carousel, slides, slideWidth, updateWidth){
 
     if(nbSlides > 1){
         if(!updateWidth){
-            carousel.prepend('<button id="prev" class="navSlider icon-left none"></button>').append('<button id="next" class="navSlider icon-right"></button>');
+            if(arrows){
+                carousel.prepend('<button id="prev" class="navSlider icon-left none"></button>').append('<button id="next" class="navSlider icon-right"></button>');
+
+                btnPrev = carousel.find('#prev');
+                btnNext = carousel.find('#next');
+
+                btnNext.on('click', function(){ letSlide(true); });
+                btnPrev.on('click', function(){ letSlide(false); });
+
+                if(isMobile.any){
+                    carousel.on('swipeleft', function(){ letSlide(true); });
+                    carousel.on('swiperight', function(){ letSlide(false); });
+                }
+            }
+            
             carousel.parents('.wrapper-ecran').length ? carousel.parents('.wrapper-ecran').after('<ul class="dots"></ul>') : carousel.append('<ul class="dots"></ul>');
 
             for(i; i<nbSlides; i++){
                 carousel.parents('section').find('.dots').append('<li><button>&bull;</button></li>');
-            }
-
-            btnPrev = carousel.find('#prev');
-            btnNext = carousel.find('#next');
-
-            btnNext.on('click', function(){ letSlide(true); });
-            btnPrev.on('click', function(){ letSlide(false); });
-
-            if(isMobile.any){
-                carousel.on('swipeleft', function(){ letSlide(true); });
-                carousel.on('swiperight', function(){ letSlide(false); });
             }
 
             carousel.parents('section').find('.dots').find('button').on('click', function(){ letSlide($(this).parents('li').index()); });
@@ -199,7 +209,7 @@ $(function(){
         setSliderHeight($('.carouselDots'));
         var c = 0, carousels = $('.carouselDots'), nbCarousels = carousels.length;
         for(c; c<nbCarousels; c++){
-            setCarouselDots(carousels.eq(c), carousels.eq(c).find('li'), carousels.eq(c).find('li').eq(0).width(), false);
+            setCarouselDots(carousels.eq(c), carousels.eq(c).find('li'), carousels.eq(c).find('li').eq(0).width(), false, true);
         }
     }
 
@@ -209,7 +219,7 @@ $(function(){
             setSliderHeight($('.carouselDots'));
             var c = 0, carousels = $('.carouselDots'), nbCarousels = carousels.length;
             for(c; c<nbCarousels; c++){
-                setCarouselDots(carousels.eq(c), carousels.eq(c).find('ul').eq(0).find('li'), carousels.eq(c).find('li').eq(0).width(), true);
+                setCarouselDots(carousels.eq(c), carousels.eq(c).find('ul').eq(0).find('li'), carousels.eq(c).find('li').eq(0).width(), true, true);
             }
         }
     }
