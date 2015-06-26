@@ -4,7 +4,7 @@
 	global $wp_query;
 	$results = $wp_query->found_posts; ?>
 
-		<h1>La recherche "<?php the_search_query(); ?>" a retourné <?php if($results > 1){ echo $results . ' résultats'; }else{ '1 résultat' } ?> </h1>
+		<h1>La recherche "<?php the_search_query(); ?>" a retourné <?php if($results > 1){ echo $results . ' résultats'; }else{ echo '1 résultat'; } ?> </h1>
 
 		<?php while ( have_posts() ) : the_post(); ?>
 

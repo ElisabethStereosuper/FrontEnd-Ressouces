@@ -7,7 +7,7 @@
 			<article>
 					
 				<h1><?php the_title(); ?></h1>
-				<div class="post-meta">
+				<div class="postMeta">
 					<?php echo get_the_date(); ?>
 				</div>
 						

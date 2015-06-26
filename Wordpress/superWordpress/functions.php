@@ -1,9 +1,19 @@
 <?php define( 'SUPER_VERSION', 1.0 );
 
 /*-----------------------------------------------------------------------------------*/
-/* Add Rss feed support to Head section
+/* General
 /*-----------------------------------------------------------------------------------*/
+// Theme support
+add_theme_support( 'html5', array('comment-list', 'comment-form', 'search-form', 'gallery', 'caption', 'widgets') );
+add_theme_support( 'post-thumbnails', array( 'post', 'page' )); 
+
+// Feed
 add_theme_support( 'automatic-feed-links' );
+function remove_comments_rss( $for_comments ){ return; }
+add_filter('post_comments_feed_link', 'remove_comments_rss');
+
+// Admin bar
+show_admin_bar(false);
 
 /*-----------------------------------------------------------------------------------*/
 /* Hide Wordpress version and stuff for security, hide login errors
@@ -12,26 +22,26 @@ remove_action('wp_head', 'wp_generator');
 remove_action('wp_head', 'wp_shortlink_wp_head', 10, 0 );
 remove_action('wp_head', 'rsd_link');
 remove_action('wp_head', 'wlwmanifest_link');
+remove_action('wp_head', 'print_emoji_detection_script', 7);
+remove_action('wp_print_styles', 'print_emoji_styles');
+remove_action('admin_print_scripts', 'print_emoji_detection_script');
 
 add_filter('login_errors', create_function('$a', "return null;"));
 
-function remove_comment_author_class( $classes ) {
-	foreach( $classes as $key => $class ) {
-		if(strstr($class, "comment-author-")) {
-			unset( $classes[$key]
- );
-		}
+function remove_comment_author_class( $classes ){
+	foreach( $classes as $key => $class ){
+		if(strstr($class, "comment-author-")){ unset( $classes[$key] ); }
 	}
 	return $classes;
 }
 add_filter( 'comment_class' , 'remove_comment_author_class' );
 
 /*-----------------------------------------------------------------------------------*/
-/* Register main menu for Wordpress use
+/* Menus
 /*-----------------------------------------------------------------------------------*/
 register_nav_menus( 
 	array(
-		'primary'	=>	__( 'Primary Menu', 'naked' ), 
+		'primary' => 'Primary Menu', 
 	)
 );
 
@@ -39,8 +49,8 @@ register_nav_menus(
 function css_attributes_filter($var) {
      return is_array($var) ? array_intersect($var, array('current-menu-item', 'current_page_parent')) : '';
 }
-add_filter('nav_menu_css_class', 'css_attributes_filter', 100, 1);
-add_filter('page_css_class', 'css_attributes_filter', 100, 1);
+add_filter('nav_menu_css_class', 'css_attributes_filter', 10, 1);
+add_filter('page_css_class', 'css_attributes_filter', 10, 1);
 
 /*-----------------------------------------------------------------------------------*/
 /* Activate sidebar for Wordpress use
@@ -52,8 +62,8 @@ function super_register_sidebars() {
 		'description' => 'Take it on the side...', 
 		'before_widget' => '',	
 		'after_widget' => '',	
-		'before_title' => '<h3>',	
-		'after_title' => '</h3>',		
+		'before_title' => '',	
+		'after_title' => '',		
 		'empty_title'=> ''
 	));
 } 
@@ -81,7 +91,7 @@ function super_scripts()  {
 		
 		// footer
 	    wp_deregister_script('jquery');
-		wp_enqueue_script( 'super-jquery', get_template_directory_uri() . '/js/jquery-1.11.1.min.js', array(), null, true );
+		wp_enqueue_script( 'jquery', get_template_directory_uri() . '/js/jquery-1.11.1.min.js', array(), null, true );
   
 }
 add_action( 'wp_enqueue_scripts', 'super_scripts' );

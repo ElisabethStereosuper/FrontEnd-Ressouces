@@ -9,8 +9,8 @@ html,
 button,
 input,
 select,
-textarea {
-    color: @noir;
+textarea{
+    color: #000;
 }
 
 /* @group Mes styles */
@@ -18,15 +18,25 @@ textarea {
 /* @group General */
 
 /* selection */
-::-moz-selection { 
-	background: @noir;  
-	color: @blanc;
+::-moz-selection{ 
+	background: #000;  
+	color: #fff;
 	text-shadow: none; 
 }
-::selection { 
-	background: @noir;  
-	color: @blanc; 
+::selection{ 
+	background: #000;  
+	color: #fff; 
 	text-shadow: none; 
+}
+
+html{
+  font-size: 62.5%; /* sets the base font to 10px for easier math */
+}
+
+body{
+  font-size: 16px;
+  font-size: 1.6rem;  
+  /* sets the default sizing to make sure nothing is actually 10px */
 }
 
 /* @end */
@@ -34,13 +44,13 @@ textarea {
 /* @group Non semantic Boilerplate */
 
 /* remplacement image */
-.ir {
+.ir{
     background-color: transparent;
     border: 0;
     overflow: hidden;
     *text-indent: -9999px;
 }
-.ir:before {
+.ir:before{
     content: "";
     display: block;
     width: 0;
@@ -48,82 +58,29 @@ textarea {
 }
 
 /* masquage de texte, alternative (buggé?) */
-.hide-text {
+.hide-text{
 	text-indent: 100%;
 	white-space: nowrap;
 	overflow: hidden;
 }
 
 /* masqué */
-.hidden {
-    display: none !important;
-    visibility: hidden;
-}
-
-/* masqué juste sur l'écran (pas sur RSS ou moteurs) */
-.visuallyhidden {
-    border: 0;
-    clip: rect(0 0 0 0);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    width: 1px;
+.none{
+    display: none;
 }
 
 /* clearfix */
 
 .clearfix:before,
-.clearfix:after {
+.clearfix:after{
     content: " "; /* 1 */
     display: table; /* 2 */
 }
-.clearfix:after {
+.clearfix:after{
     clear: both;
 }
 
 /* @end */
 
 
-/* ==|== media queries ======================================================
-   ========================================================================== */
-
-/* @group Responsive horizontal */
-
-@media (max-width: 1150px){
-}
-
-@media (max-width: 979px){
-}
-
-@media (max-width: 767px){
-}
-
-@media (max-width: 450px){
-}
-
-/* @end */
-
-/* retina */
-@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-resolution: 144dpi) {
-    
-}
-
-
-/* ==|== print styles =======================================================
-   ========================================================================== */
- 
-@media print {
-  * {} 
-  a, a:visited { text-decoration: underline; }
-  a[href]:after { content: " (" attr(href) ")"; }
-  .ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after { content: ""; }
-  pre, blockquote { border: 1px solid #999; page-break-inside: avoid; }
-  thead { display: table-header-group; }
-  tr, img { page-break-inside: avoid; }
-  img { max-width: 100% !important; }
-  @page { margin: 0.5cm; }
-  p, h2, h3 { orphans: 3; widows: 3; }
-  h2, h3 { page-break-after: avoid; }
-}
+@import "mediaqueries.less";

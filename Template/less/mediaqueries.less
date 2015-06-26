@@ -1,0 +1,41 @@
+/* ==|== media queries ======================================================
+   ========================================================================== */
+
+/* @group Responsive horizontal */
+
+@media (max-width: 1150px){
+}
+
+@media (max-width: 979px){
+}
+
+@media (max-width: 767px){
+}
+
+@media (max-width: 450px){
+}
+
+/* @end */
+
+/* retina */
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-resolution: 144dpi) {
+    
+}
+
+
+/* ==|== print styles =======================================================
+   ========================================================================== */
+ 
+@media print {
+  * {} 
+  a, a:visited { text-decoration: underline; }
+  a[href]:after { content: " (" attr(href) ")"; }
+  .ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after { content: ""; }
+  pre, blockquote { border: 1px solid #999; page-break-inside: avoid; }
+  thead { display: table-header-group; }
+  tr, img { page-break-inside: avoid; }
+  img { max-width: 100% !important; }
+  @page { margin: 0.5cm; }
+  p, h2, h3 { orphans: 3; widows: 3; }
+  h2, h3 { page-break-after: avoid; }
+}

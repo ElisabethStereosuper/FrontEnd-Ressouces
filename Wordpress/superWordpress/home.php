@@ -5,14 +5,15 @@
 	<?php wp_list_categories( array('title_li' => '') ); ?> 
 
 	<?php if ( have_posts() ) : 
-	global $paged;
-	if(get_query_var('paged')){
-		$paged = get_query_var('paged');
-	}elseif(get_query_var('page')){
-		$paged = get_query_var('page');
-	}else{
-		$paged = 1;
-	} ?>
+		/*global $paged;
+		if(get_query_var('paged')){
+			$paged = get_query_var('paged');
+		}elseif(get_query_var('page')){
+			$paged = get_query_var('page');
+		}else{
+			$paged = 1;
+		} */
+	?>
 
 		<?php while ( have_posts() ) : the_post(); ?>
 			
@@ -27,6 +28,10 @@
 
 		<?php previous_posts_link('Articles suivants'); ?>
 		<?php next_posts_link('Articles précédents'); ?>
+
+		<div class='pagination'>
+			<?php echo paginate_links( array( 'prev_text' => '<b>‹</b> <span>' . 'Précédent' . '</span>', 'next_text'  => '<span>' . 'Suivant' . '</span> <b>›</b>' ) ); ?>
+		</div>
 	
 	<?php else : ?>
 				
