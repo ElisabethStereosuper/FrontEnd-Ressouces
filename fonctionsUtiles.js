@@ -20,28 +20,32 @@ function scrollPage(){
 
 /**** Tester si un élément est visible dans la fenetre ****/
 function isVisible(elt){
-    var botView = myScroll + $(window).height();
-    var topElt = elt.offset().top;
-    var botElt = topElt + elt.height();
+    var botView = myScroll + $(window).height(),
+        topElt = elt.offset().top,
+        botElt = topElt + elt.height();
     return ((botElt <= botView) && (topElt >= myScroll));
 }
 
 /**** Récupérer un paramètre GET dans l'url ****/
-jQuery.urlParam = function(name){
-    var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
-    if (results == null){
-        return null;
-    }else{
-        return results[1] || 0;
-    }
+$.urlParam = function(name){
+    var params = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href),
+        results = params == null ? null : params[1] || 0;
+    return results;
 }
+// var paramContent = $.urlParam(paramName);
 
 /**** Mélanger aléatoire un tableau ****/
 function shuffle(array) {
-  var random = array.map(Math.random);
-  array.sort(function(a, b){
-    return random[a] - random[b];
-  });
+  var elementsRemaining = array.length, temp, randomIndex;
+  while (elementsRemaining > 1) {
+    randomIndex = Math.floor(Math.random() * elementsRemaining--);
+    if (randomIndex != elementsRemaining) {
+      temp = array[elementsRemaining];
+      array[elementsRemaining] = array[randomIndex];
+      array[randomIndex] = temp;
+    }
+  }
+  return array;
 }
 
 /**** Validation email et tel ****/
@@ -57,9 +61,9 @@ function isValidTel(n){
 
 /**** Footer toujours en bas de page ****/
 function stickyFooter(){
-	var docHeight = $('html').height();
-	var windowHeight = $(window).height();
-	var footer = $('footer');
+	var docHeight = $('html').height(),
+	    windowHeight = $(window).height(),
+	    footer = $('footer');
 
 	if(footer.hasClass('bottom')){
 		docHeight += footer.height();
