@@ -81,6 +81,7 @@ define('WP_DEBUG', true);
 
 define('WP_POST_REVISIONS', 5);
 define('EMPTY_TRASH_DAYS', 10);
+define('WP_AUTO_UPDATE_CORE', true);
 
 /* C'est tout, ne touchez pas à ce qui suit ! Bon blogging ! */
 
