@@ -80,7 +80,7 @@ add_action( 'pre_get_posts', 'set_archive_number_posts', 1 );
 /*-----------------------------------------------------------------------------------*/
 class Img_Widget extends ACF_Widget{
     function Img_Widget() {
-        parent::WP_Widget('Img_Widget', 'Wisembly - Lien avec image', array('description' => 'Affiche un lien vers un autre site avec une image pour contenu.'));
+        parent::__construct('Img_Widget', 'Wisembly - Lien avec image', array('description' => 'Affiche un lien vers un autre site avec une image pour contenu.'));
         $this->acf_group_id = 2035;
     }
     function widget($args, $instance){
@@ -136,6 +136,11 @@ if(!function_exists('avignon_mce_before_init')){
             )
         );
         $styles['style_formats'] = json_encode( $style_formats );
+
+        // Remove h1 and code
+        $styles['block_formats'] = 'Paragraph=p;Heading 2=h2;Heading 3=h3;Heading 4=h4;Heading 5=h5;Heading 6=h6';
+        // Let only the colors you want
+        $styles['textcolor_map'] = '[' . "'000000', 'Black', '979797', 'Grey', '932712', 'Red'" . ']';
         return $styles;
     }
 }

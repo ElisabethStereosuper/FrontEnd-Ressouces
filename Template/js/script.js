@@ -4,10 +4,10 @@
 /**** INIT ****/
 $(function(){
 
-    $(document).scroll(function() {
+    $(document).scroll(function(){
     });
 
-    $(window).resize(function() {
+    $(window).resize(function(){
 	});
 
 	$(window).load(function(){
