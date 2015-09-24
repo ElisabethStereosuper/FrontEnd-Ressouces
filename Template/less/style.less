@@ -5,7 +5,7 @@
 @blanc: #fff;
 @noir: #000;
 
-/* @group Mes styles */
+/* @group Styles */
 
 /* @group General */
 
@@ -85,28 +85,7 @@ a{
 
 /* @end */
 
-/* @group Non semantic Boilerplate */
-
-/* remplacement image */
-.ir{
-    background-color: transparent;
-    border: 0;
-    overflow: hidden;
-    *text-indent: -9999px;
-}
-.ir:before{
-    content: "";
-    display: block;
-    width: 0;
-    height: 100%;
-}
-
-/* masquage de texte, alternative (buggé?) */
-.hide-text{
-	text-indent: 100%;
-	white-space: nowrap;
-	overflow: hidden;
-}
+/* @group Utils */
 
 /* masqué */
 .hidden{
@@ -114,17 +93,15 @@ a{
 }
 
 /* clearfix */
-
 .clearfix:before,
 .clearfix:after{
-    content: " "; /* 1 */
-    display: table; /* 2 */
+    content: " ";
+    display: table;
 }
 .clearfix:after{
     clear: both;
 }
 
 /* @end */
-
 
 @import "_mediaqueries.less";
