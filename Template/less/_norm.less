@@ -16,40 +16,37 @@ main{
 audio,
 canvas,
 video{
-    display: inline-block
+    display: inline-block;
+    vertical-align: middle
 }
 
 audio:not([controls]), [hidden], template{
     display: none
 }
 
-*,::after,::before{
-    box-sizing: inherit;
-    border-style: solid;
-    border-width: 0
-}
-
 *{
+    box-sizing: inherit;
+    padding: 0;
+    margin: 0;
     font-size: inherit;
     line-height: inherit;
-    margin: 0;
-    padding: 0
+    &:after, &:before{
+        box-sizing: inherit;
+    }
 }
 
 ::after,::before{
-    text-decoration: inherit;
-    vertical-align: inherit
+    vertical-align: inherit;
+    text-decoration: inherit
 }
 
 :root{
+    box-sizing: border-box;
     -ms-overflow-style: -ms-autohiding-scrollbar;
-    overflow-y: scroll;
+    font-family: sans-serif;
     -webkit-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
     text-size-adjust: 100%;
-    box-sizing: border-box;
-    cursor: default;
-    font-family: sans-serif;
     text-rendering: optimizeLegibility
 }
 
@@ -62,32 +59,10 @@ a{
     }
 }
 
-audio,
-canvas,
 iframe,
 img,
-svg,
-video{
+svg{
     vertical-align: middle
-}
-
-button,
-input,
-select,
-textarea{
-    font-family: inherit;
-    font-size: 100%; 
-    margin: 0;
-    vertical-align: baseline;
-    background-color: transparent;
-    color: inherit;
-    font-style: inherit;
-    font-weight: inherit
-}
-
-button,
-input{
-    line-height: normal
 }
 
 abbr[title]{
@@ -108,11 +83,6 @@ mark{
     color: #000
 }
 
-p,
-pre{
-    margin: 1em 0
-}
-
 code,
 kbd,
 pre,
@@ -125,7 +95,8 @@ pre{
     white-space: pre;
     white-space: pre-wrap;
     word-wrap: break-word;
-    overflow: auto
+    overflow: auto;
+    margin: 1em 0
 }
 
 q{
@@ -144,9 +115,9 @@ small{
 
 sub,
 sup{
-    line-height: 0;
     position: relative;
-    vertical-align: baseline
+    vertical-align: baseline;
+    line-height: 0
 }
 
 sup{
@@ -165,28 +136,37 @@ nav ol{
 
 img{
     border: 0; 
-    -ms-interpolation-mode: bicubic; 
-    vertical-align: middle
+    -ms-interpolation-mode: bicubic
 }
 
 svg:not(:root){
     overflow: hidden
 }
 
-figure, form{
-    margin: 0
-}
-
-fieldset{
-    border: 0;
-    margin: 0;
-    padding: 0
+fieldset,
+legend{
+    border: 0
 }
 
 legend{
-    border: 0; 
-    padding: 0;
     white-space: normal
+}
+
+button,
+input,
+select,
+textarea{
+    vertical-align: baseline;
+    font-family: inherit;
+    font-size: 100%;
+    background-color: transparent;
+    color: inherit;
+    font-style: inherit;
+    font-weight: inherit
+}
+
+select{
+    cursor: pointer
 }
 
 button,
@@ -204,7 +184,6 @@ input[disabled]{
 
 input{
     &[type=checkbox], &[type=radio]{
-        padding: 0;
         cursor: pointer;
     }
     &[type=search]{
@@ -220,6 +199,7 @@ input{
 
 button,
 input{
+    line-height: normal;
     &::-moz-focus-inner{
         border: 0;
         padding: 0
@@ -227,8 +207,8 @@ input{
 }
 
 textarea{
-    overflow: auto; 
     vertical-align: top;
+    overflow: auto;
     resize: vertical
 }
 
@@ -242,10 +222,7 @@ progress{
 }
 
 [unselectable]{
-    -webkit-user-select:none;
-    -moz-user-select:none;
-    -ms-user-select:none;
-    user-select:none
+    .user-select(none);
 }
 
 dl,
