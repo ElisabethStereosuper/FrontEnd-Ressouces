@@ -153,6 +153,23 @@ legend{
 }
 
 button,
+html input[type=button], 
+input[type=reset],
+input[type=submit]{
+    -webkit-appearance: button;
+    cursor: pointer
+}
+
+select{
+    cursor: pointer
+}
+
+button[disabled],
+input[disabled]{
+    cursor: default
+}
+
+button,
 input,
 select,
 textarea{
@@ -163,23 +180,6 @@ textarea{
     color: inherit;
     font-style: inherit;
     font-weight: inherit
-}
-
-select{
-    cursor: pointer
-}
-
-button,
-html input[type=button], 
-input[type=reset],
-input[type=submit]{
-    -webkit-appearance: button;
-    cursor: pointer
-}
-
-button[disabled],
-input[disabled]{
-    cursor: default
 }
 
 input{

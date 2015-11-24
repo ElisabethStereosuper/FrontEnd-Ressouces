@@ -19,11 +19,22 @@ function scrollPage(){
 }
 
 /**** Tester si un élément est visible dans la fenetre ****/
-function isVisible(elt){
-    var botView = myScroll + $(window).height(),
-        topElt = elt.offset().top,
-        botElt = topElt + elt.height();
-    return ((botElt <= botView) && (topElt >= myScroll));
+function isVisible(el){
+    var top = el.offsetTop,
+        left = el.offsetLeft,
+        width = el.offsetWidth,
+        height = el.offsetHeight;
+
+    while(el.offsetParent){
+        el = el.offsetParent;
+        top += el.offsetTop;
+        left += el.offsetLeft;
+    }
+
+    return(
+        top < (window.pageYOffset + window.innerHeight) && left < (window.pageXOffset + window.innerWidth) &&
+        (top + height) > window.pageYOffset && (left + width) > window.pageXOffset
+    );
 }
 
 /**** Récupérer un paramètre GET dans l'url ****/
