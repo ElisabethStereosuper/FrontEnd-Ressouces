@@ -90,7 +90,7 @@ if(isset($_POST['submit'])){
 <?php }else{ ?>
 
 	<?php if($status == 'erreur'){
-		echo "<p><b>Oups! Nous n'avons pas pu envoyer votre demande:/b><br/>";
+		echo "<p><b>Oups! Nous n'avons pas pu envoyer votre demande:</b><br/>";
 		if($erreurPrenom != '') echo $erreurPrenom .'<br/>';
 		if($erreurNom != '') echo $erreurNom .'<br/>';
 		if($erreurEnt != '') echo $erreurEnt .'<br/>';
