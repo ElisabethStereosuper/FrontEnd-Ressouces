@@ -4,14 +4,12 @@
 @import "_norm.less";
 @import "_fonts.less";
 
-@blanc: #fff;
-@noir: #000;
+@txt: #565656;
+@transition: .3s ease-in-out;
 
-/* @group Styles */
 
-/* @group General */
+/******* GÉNÉRAL *******/
 
-/* selection */
 ::-moz-selection{ 
 	background: #000;  
 	color: #fff;
@@ -29,7 +27,7 @@ html{
 
 body{
   font-size: 1.6em;  
-  /* sets the default sizing to make sure nothing is actually 10px */
+  /* sets the default sizing to make sure nothing is actually 16px */
 }
 
 h1{
@@ -70,8 +68,7 @@ blockquote{
     margin: 1em 40px;
 }
 
-ol,
-ul{
+ol, ul{
     margin: 1em 0;
     padding: 0 0 0 40px;
 }
@@ -86,10 +83,72 @@ img{
 
 a{
   text-decoration: none;
+  transition: @transition;
+  &:focus, &:hover{
+  }
+  &:focus{
+      outline: 0;
+  }
+  &:active{
+  }
 }
 
 
+/******* FORMULAIRES *******/
+
+::-webkit-input-placeholder{
+    color: #8b8b8b;
+}
+::-moz-placeholder{
+    color: #8b8b8b;
+}
+:-ms-input-placeholder{
+    color: #8b8b8b;
+}
+
+input, textarea{
+  &:focus{
+      outline: 0;
+  }
+}
+
+input{
+
+}
+
+button{
+  &:focus{
+      outline: 0;
+  }
+}
+
+label{
+
+}
+
+
+/******* MODULES *******/
+
+.container{
+    max-width: 1200px;
+    padding: 0 20px;
+    margin: 0 auto;
+}
+
+
+/******* HEADER *******/
+
+
+/******* FOOTER *******/
+
+
 /******* CLASSES GENERALES  *******/
+
+.reset-ul{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
 
 .hidden{
     display: none !important;
@@ -104,6 +163,5 @@ a{
     clear: both;
 }
 
-/* @end */
 
 @import "_mediaqueries.less";
