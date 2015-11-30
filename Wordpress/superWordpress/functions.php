@@ -16,6 +16,12 @@ add_theme_support( 'automatic-feed-links' );
 function remove_comments_rss( $for_comments ){ return; }
 add_filter('post_comments_feed_link', 'remove_comments_rss');
 
+// Disable Tags
+function super_unregister_tags() {
+    unregister_taxonomy_for_object_type('post_tag', 'post');
+}
+add_action('init', 'super_unregister_tags');
+
 
 /*-----------------------------------------------------------------------------------*/
 /* Hide Wordpress version and stuff for security, hide login errors
