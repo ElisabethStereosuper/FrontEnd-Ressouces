@@ -162,6 +162,7 @@ button,
 html input[type=button], 
 input[type=reset],
 input[type=submit]{
+    -moz-appearance: button;
     -webkit-appearance: button;
     cursor: pointer
 }
@@ -185,21 +186,17 @@ textarea{
     background-color: transparent;
     color: inherit;
     font-style: inherit;
-    font-weight: inherit
+    font-weight: inherit;
+    -moz-appearance: none;
+    -webkit-appearance: none;
 }
 
 input{
     &[type=checkbox], &[type=radio]{
         cursor: pointer;
     }
-    &[type=search]{
-        -webkit-appearance: textfield;
-        &::-webkit-search-cancel-button, &::-webkit-search-decoration{
-            -webkit-appearance: none;
-        }
-    }
     &[type=number]{
-        width:auto
+        width: auto
     }
 }
 
