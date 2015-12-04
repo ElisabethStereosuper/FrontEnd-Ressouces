@@ -42,23 +42,31 @@ if('comments.php' == basename($_SERVER['SCRIPT_FILENAME']))
 				<?php if( !$user_ID ) : ?>
 					
 					<fieldset>
-						<fieldset>
-							<label for='author'>Votre nom<?php if($req) echo '<span>*</span>'; ?> :</label>
-							<input type='text' name='author' id='author' value='<?php echo $comment_author; ?>' required/>
-						</fieldset><fieldset>
-							<label for='email'>Votre email<?php if($req) echo '<span>*</span>'; ?> :</label>
-							<input type='email' name='email' id='email' value='<?php echo $comment_author_email; ?>' required/>
-						</fieldset>
+						<label for='author' <?php if($req) echo "class='required'"; ?>>
+							Votre nom
+						</label><input type='text' name='author' id='author' value='<?php echo $comment_author; ?>' <?php if($req) echo 'required'; ?>>
+						<span></span>
 					</fieldset>
-					
-					<label for='url'>Votre site :</label>
-					<input type='url' name='url' id='url' value='<?php echo $comment_author_url; ?>'/>
+					<fieldset>
+						<label for='email' <?php if($req) echo "class='required'"; ?>>
+							Votre email
+						</label><input type='email' name='email' id='email' value='<?php echo $comment_author_email; ?>' <?php if($req) echo 'required'; ?>>
+						<span></span>
+					</fieldset>
+					<fieldset>
+						<label for='url' <?php if($req) echo "class='required'"; ?>>
+							Votre site
+						</label><input type='url' name='url' id='url' value='<?php echo $comment_author_url; ?>' <?php if($req) echo 'required'; ?>>
+						<span></span>
+					</fieldset>					
 
 				<?php endif; ?>
 				
 				<fieldset>
-					<label for='comment'>Votre commentaire :</label>
-					<textarea name='comment' id='comment'></textarea>
+					<label for='comment' <?php if($req) echo "class='required'"; ?>>
+						Votre commentaire
+					</label><textarea name='comment' id='comment' <?php if($req) echo 'required'; ?>></textarea>
+					<span></span>
 				</fieldset>
 				
 				<button name='submit' type='submit' class='btn btn-right'>Envoyer</button>
