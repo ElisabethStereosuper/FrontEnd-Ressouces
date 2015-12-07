@@ -73,7 +73,7 @@ function isValidTel(n){
 /**** Footer toujours en bas de page ****/
 function stickyFooter(){
 	var docHeight = $('html').height(),
-	    windowHeight = $(window).height(),
+        windowHeight = $(window).height(),
 	    footer = $('footer');
 
 	if(footer.hasClass('bottom')){

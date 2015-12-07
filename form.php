@@ -98,7 +98,9 @@ if(isset($_POST['submit'])){
 		if($erreurTel != '') echo $erreurTel .'<br/>';
 		if($erreurEnvoi != '') echo $erreurEnvoi;
 		echo '</p>';
-	} ?>
+	}
+
+	?>
 
 	<form id='formContact' action='#' method='POST'>
 		<fieldset class='profil'>
