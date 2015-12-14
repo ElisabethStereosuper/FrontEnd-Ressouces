@@ -13,6 +13,8 @@
 			<?php is_front_page() ? bloginfo('description') : wp_title(''); ?>
 		</title>
 
+		<link rel='alternate' type='application/rss+xml' title='<?php echo get_bloginfo('sitename') ?> Feed' href='<?php echo get_bloginfo('rss2_url') ?>'>
+
 		<?php wp_head(); ?>
 
 	</head>
