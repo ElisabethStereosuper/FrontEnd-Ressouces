@@ -88,13 +88,12 @@ Header unset Cache-Control
 </filesmatch>
 # disallow site to be in iframe or clickjacking attack
 Header always set X-FRAME-OPTIONS SAMEORIGIN
+# disallow mime-type sniffing
+Header always set X-Content-Type-Options "nosniff"
 </Ifmodule>
 
 # KILL ETAGS
 FileETag none
-
-# Use UTF-8 encoding for anything served text/plain or text/html
-AddDefaultCharset utf-8
 
 # protection
 <files .htaccess>
@@ -169,6 +168,12 @@ AddDefaultCharset utf-8
 		Deny from all
 	</IfModule>
 </files>
+
+# Use UTF-8 encoding for anything served text/plain or text/html
+AddDefaultCharset utf-8
+
+# addType woff2
+AddType application/x-font-woff2 .woff2
 
 # protection de la lecture des répertoires
 Options -Indexes

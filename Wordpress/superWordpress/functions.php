@@ -22,26 +22,32 @@ add_action('init', 'super_unregister_tags');
 
 
 /*-----------------------------------------------------------------------------------*/
-/* Hide Wordpress version and stuff for security, hide login errors
+/* Clean WordPress head and remove some stuff for security
 /*-----------------------------------------------------------------------------------*/
-
 remove_action('wp_head', 'wp_generator');
-remove_action('wp_head', 'wp_shortlink_wp_head', 10, 0 );
+remove_action('wp_head', 'wp_shortlink_wp_head', 10, 0);
 remove_action('wp_head', 'rsd_link');
 remove_action('wp_head', 'wlwmanifest_link');
 remove_action('wp_head', 'print_emoji_detection_script', 7);
 remove_action('wp_print_styles', 'print_emoji_styles');
 remove_action('admin_print_scripts', 'print_emoji_detection_script');
 
-add_filter('login_errors', create_function('$a', "return null;"));
+// remove api rest links
+remove_action('wp_head', 'rest_output_link_wp_head');
+remove_action('wp_head', 'wp_oembed_add_discovery_links');
 
+// remove comment author class
 function remove_comment_author_class( $classes ){
 	foreach( $classes as $key => $class ){
-		if(strstr($class, "comment-author-")) unset( $classes[$key] );
+		if(strstr($class, "comment-author-")) 
+			unset( $classes[$key] );
 	}
 	return $classes;
 }
 add_filter( 'comment_class' , 'remove_comment_author_class' );
+
+// remove login errors
+add_filter('login_errors', create_function('$a', "return null;"));
 
 
 /*-----------------------------------------------------------------------------------*/
@@ -54,10 +60,10 @@ function super_imagelink_setup(){
     if($image_set !== 'none')
         update_option('image_default_link_type', 'none');
 }
-add_action('admin_init', 'super_imagelink_setup', 10);
+add_action('admin_init', 'super_imagelink_setup');
 
 // Custom posts in the dashboard
-function add_right_now_custom_post() {
+function super_right_now_custom_post() {
     $post_types = get_post_types(array( '_builtin' => false ) , 'objects' , 'and');
     foreach($post_types as $post_type){
         $cpt_name = $post_type->name;
@@ -69,7 +75,17 @@ function add_right_now_custom_post() {
         }
     }
 }
-add_action('dashboard_glance_items', 'add_right_now_custom_post');
+add_action('dashboard_glance_items', 'super_right_now_custom_post');
+
+// Customize a bit the wysiwyg editor
+function super_mce_before_init( $styles ){
+    // Remove h1 and code
+    $styles['block_formats'] = 'Paragraph=p;Heading 2=h2;Heading 3=h3;Heading 4=h4;Heading 5=h5;Heading 6=h6';
+    // Let only the colors you want
+    $styles['textcolor_map'] = '[' . "'000000', 'Noir', '565656', 'Texte', 'b5006a', 'Violet'" . ']';
+    return $styles;
+}
+add_filter('tiny_mce_before_init', 'super_mce_before_init');
 
 /*-----------------------------------------------------------------------------------*/
 /* Menus
@@ -82,11 +98,10 @@ register_nav_menus(
 );
 
 // Cleanup WP Menu html
-function css_attributes_filter($var) {
+function css_attributes_filter($var){
      return is_array($var) ? array_intersect($var, array('current-menu-item', 'current_page_parent')) : '';
 }
-add_filter('nav_menu_css_class', 'css_attributes_filter', 10, 1);
-add_filter('page_css_class', 'css_attributes_filter', 10, 1);
+add_filter('nav_menu_css_class', 'css_attributes_filter');
 
 
 /*-----------------------------------------------------------------------------------*/
