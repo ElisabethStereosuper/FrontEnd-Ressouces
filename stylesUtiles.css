@@ -4,7 +4,7 @@ html {
 
 body {
   font-size: 16px;
-  font-size: 1.6rem;  
+  font-size: 1.6rem;
   /* sets the default sizing to make sure nothing is actually 10px */
 }
 
@@ -25,4 +25,9 @@ body {
 	border-style: solid;
 	border-width: 0 0 25px 25px;
 	border-color: transparent transparent #fff transparent;
+}
+
+/**** Cacher la flèche dans un select IE10+ / Edge ****/
+select::-ms-expand{
+    display: none;
 }
