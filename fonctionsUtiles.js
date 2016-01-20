@@ -1,5 +1,5 @@
 /**** VARIABLES ****/
-var myScroll;
+var myScroll = 0, scrollDir = 0, lastScrollTop = 0;
 
 /**** Remplacement document.scroll ****/
 window.requestAnimFrame = (function(){
@@ -59,15 +59,28 @@ function shuffle(array) {
   return array;
 }
 
-/**** Validation email et tel ****/
+/**** Validation email ****/
 function isValidEmail(email) {
     var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
     return pattern.test(email);
 }
 
+/**** Validation tel ****/
 function isValidTel(n){
   var pattern = new RegExp(/^\+?[^.\-][0-9\.\- ]+$/);
   return pattern.test(n);
+}
+
+/**** Detect scroll direction (-1->to top, 1->to bottom) ****/
+function detectScrollDir(){
+    if(myScroll > lastScrollTop){
+        scrollDir = -1;
+    }else if(myScroll < lastScrollTop){
+        scrollDir = 1;
+    }else{
+        scrollDir = 0;
+    }
+    lastScrollTop = myScroll;
 }
 
 /**** Footer toujours en bas de page ****/
