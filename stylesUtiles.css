@@ -1,8 +1,8 @@
-html {
+html{
   font-size: 62.5%; /* sets the base font to 10px for easier math */
 }
 
-body {
+body{
   font-size: 16px;
   font-size: 1.6rem;
   /* sets the default sizing to make sure nothing is actually 10px */
@@ -27,7 +27,33 @@ body {
 	border-color: transparent transparent #fff transparent;
 }
 
-/**** Cacher la flèche dans un select IE10+ / Edge ****/
+/**** Cacher la flèche dans un select IE10+ ****/
 select::-ms-expand{
     display: none;
+}
+
+/**** Créer des puces numérotées ****/
+ol{
+    counter-reset: counter;
+}
+ol li{
+    counter-increment: counter;
+}
+ol li:before{
+    content: counter(counter)'.';
+}
+
+
+/**** Vidéo responsive ****/
+.videoContainer{
+    height: 0;
+    padding-bottom: 43%;
+    position: relative;
+}
+.videoContainer iframe, .videoContainer embed, .videoContainer object{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
