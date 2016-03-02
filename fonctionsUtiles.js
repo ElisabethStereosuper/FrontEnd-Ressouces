@@ -3,11 +3,11 @@ var myScroll = 0, scrollDir = 0, lastScrollTop = 0;
 
 /**** Remplacement document.scroll ****/
 window.requestAnimFrame = (function(){
-   return  window.requestAnimationFrame       || 
-           window.webkitRequestAnimationFrame || 
-           window.mozRequestAnimationFrame    || 
-           window.oRequestAnimationFrame      || 
-           window.msRequestAnimationFrame     || 
+   return  window.requestAnimationFrame       ||
+           window.webkitRequestAnimationFrame ||
+           window.mozRequestAnimationFrame    ||
+           window.oRequestAnimationFrame      ||
+           window.msRequestAnimationFrame     ||
            function(callback){
              window.setTimeout(callback, 1000/60);
            };
@@ -83,6 +83,11 @@ function detectScrollDir(){
     lastScrollTop = myScroll;
 }
 
+/**** Parallax ****/
+function calcParallaxVal(finalVal, speed){
+    return (finalVal + (myScroll + windowHeight - docHeight) / speed) | 0;
+}
+
 /**** Footer toujours en bas de page ****/
 function stickyFooter(){
 	var docHeight = $('html').height(),
@@ -95,7 +100,7 @@ function stickyFooter(){
 			footer.removeClass('bottom');
 		}
 	}
-	if (docHeight < windowHeight) { 
+	if (docHeight < windowHeight) {
 	   footer.addClass('bottom');
 	}
 }
@@ -125,134 +130,13 @@ function setToolTip(context){
     }
 }
 
-/**** Slider avec fin et puces (et fleches ou non) ****/
-function setSliderHeight(sliders){
-
-    function setHeight(context){
-        var li = context.find('ul').eq(0).find('li'), liLength = li.length, i = 0, heightMaxLi = 0;
-
-        for(i; i < liLength; i++){
-            if (li.eq(i).height() > heightMaxLi){
-                heightMaxLi = li.eq(i).height();
-            }
-        }
-
-        context.find('ul').eq(0).css('height', heightMaxLi+"px");
-    }
-
-    var c = 0, carouselLength = sliders.length;
-    for(c; c<carouselLength; c++){
-        setHeight(sliders.eq(c));
-    }
-}
-
-function setCarouselDots(carousel, slides, slideWidth, updateWidth, arrows){
-    
-    function letSlide(next){
-        
-        function goToSlide(numSlide){
-            var y = 0, x = 0;
-
-            for(y; y<numSlide; y++){
-                slides.eq(y).stop().animate({'left': -(numSlide-y)*slideWidth}, 500, 'easeOutExpo');
-            }
-            slides.removeClass('on').eq(numSlide).addClass('on').stop().animate({'left': 0}, 500, 'easeOutExpo');
-            for(numSlide; numSlide<nbSlides; numSlide++){
-                slides.eq(numSlide).stop().animate({'left': x*slideWidth}, 500, 'easeOutExpo');
-                x++;
-            }
-
-            carousel.parents('section').find('.dots').find('li').eq(carousel.find('.on').index()).find('button').addClass('actif').parents('li').siblings().find('button').removeClass('actif');
-                
-            if(strong.length){ 
-                strong.removeClass('on').eq(carousel.find('.on').index()).addClass('on'); 
-            }
-        }
-
-        var activeSlide = carousel.find('.on');
-
-        if(next === true){
-            if(activeSlide.next().length) next = activeSlide.next().index();
-        }else if(next === false){
-            if(activeSlide.prev().length) next = activeSlide.prev().index();
-        }
-
-        if(arrows){
-            btnNext.removeClass('none');
-            btnPrev.removeClass('none');
-            if(next === 0) btnPrev.addClass('none');
-            if(next+1 === nbSlides) btnNext.addClass('none');
-        }
-
-        goToSlide(next);
-
-    }
-
-    var nbSlides = slides.length, i = 0, p = 0, posSlide = 0, strong = carousel.parents('section').find('.keyword').find('strong'), btnPrev, btnNext;
-
-    if(nbSlides > 1){
-        if(!updateWidth){
-            if(arrows){
-                carousel.prepend('<button id="prev" class="navSlider icon-left none"></button>').append('<button id="next" class="navSlider icon-right"></button>');
-
-                btnPrev = carousel.find('#prev');
-                btnNext = carousel.find('#next');
-
-                btnNext.on('click', function(){ letSlide(true); });
-                btnPrev.on('click', function(){ letSlide(false); });
-
-                if(isMobile.any){
-                    carousel.on('swipeleft', function(){ letSlide(true); });
-                    carousel.on('swiperight', function(){ letSlide(false); });
-                }
-            }
-            
-            carousel.parents('.wrapper-ecran').length ? carousel.parents('.wrapper-ecran').after('<ul class="dots"></ul>') : carousel.append('<ul class="dots"></ul>');
-
-            for(i; i<nbSlides; i++){
-                carousel.parents('section').find('.dots').append('<li><button>&bull;</button></li>');
-            }
-
-            carousel.parents('section').find('.dots').find('button').on('click', function(){ letSlide($(this).parents('li').index()); });
-        }
-        
-        slides.css({'position': 'absolute', 'top': 0}).removeClass('on').eq(0).addClass('on');
-
-        for(p; p<nbSlides; p++){
-            slides.eq(p).css('left', posSlide);
-            posSlide += slideWidth;
-        }
-
-        carousel.parents('section').find('.dots').find('button').removeClass('actif').parents('li').siblings().eq(0).find('button').addClass('actif');
-
-        if(strong.length){  strong.eq(0).addClass('on'); }
-    }
-}
-
 /**** INIT ****/
 $(function(){
 
-    // Carousel with dots //
-    if($('.carouselDots').length){
-        setSliderHeight($('.carouselDots'));
-        var c = 0, carousels = $('.carouselDots'), nbCarousels = carousels.length;
-        for(c; c<nbCarousels; c++){
-            setCarouselDots(carousels.eq(c), carousels.eq(c).find('li'), carousels.eq(c).find('li').eq(0).width(), false, true);
-        }
-    }
-
     $(window).resize(function(){
-        // Carousel with dots //
-        if($('.carouselDots').length){
-            setSliderHeight($('.carouselDots'));
-            var c = 0, carousels = $('.carouselDots'), nbCarousels = carousels.length;
-            for(c; c<nbCarousels; c++){
-                setCarouselDots(carousels.eq(c), carousels.eq(c).find('ul').eq(0).find('li'), carousels.eq(c).find('li').eq(0).width(), true, true);
-            }
-        }
     }
 
-    /*$(document).scroll(function() {
+    /*$(document).scroll(function(){
         myScroll = $(this).scrollTop();
     });*/
 
