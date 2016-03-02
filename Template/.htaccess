@@ -71,7 +71,7 @@ Header set X-UA-Compatible IE=edge env=is-msie
 Header unset ETag
 Header set vary "Accept-Encoding"
 Header append vary "User-Agent"
-Header append Cache-Control "public" 
+Header append Cache-Control "public"
 Header append Connection "Keep-Alive"
 Header append Keep-Alive "timeout=5, max=100"
 <FilesMatch "\.(ico|jpe?g|png|gif|swf|gz|ttf|svg|eot|woff|pdf|mp4|mpeg|avi|svg|woff2)$">
@@ -96,7 +96,7 @@ Header always set X-Content-Type-Options "nosniff"
 FileETag none
 
 # protection
-<files .htaccess>
+<FilesMatch "\.(htaccess|wp-config.php|install.php|readme.txt|readme.html)$">
 	<IfModule mod_authz_core.c>
 		Require all denied
 	</IfModule>
@@ -104,43 +104,7 @@ FileETag none
 		Order allow,deny
 		Deny from all
 	</IfModule>
-</files>
-<files readme.html>
-	<IfModule mod_authz_core.c>
-		Require all denied
-	</IfModule>
-	<IfModule !mod_authz_core.c>
-		Order allow,deny
-		Deny from all
-	</IfModule>
-</files>
-<files readme.txt>
-	<IfModule mod_authz_core.c>
-		Require all denied
-	</IfModule>
-	<IfModule !mod_authz_core.c>
-		Order allow,deny
-		Deny from all
-	</IfModule>
-</files>
-<files install.php>
-	<IfModule mod_authz_core.c>
-		Require all denied
-	</IfModule>
-	<IfModule !mod_authz_core.c>
-		Order allow,deny
-		Deny from all
-	</IfModule>
-</files>
-<files wp-config.php>
-	<IfModule mod_authz_core.c>
-		Require all denied
-	</IfModule>
-	<IfModule !mod_authz_core.c>
-		Order allow,deny
-		Deny from all
-	</IfModule>
-</files>
+</FilesMatch>
 
 <IfModule mod_rewrite.c>
 	RewriteEngine On
