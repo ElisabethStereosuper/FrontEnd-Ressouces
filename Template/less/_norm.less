@@ -5,7 +5,6 @@ figcaption,
 figure,
 footer,
 header,
-hgroup,
 nav,
 section,
 summary,
@@ -13,9 +12,7 @@ main{
     display: block
 }
 
-audio,
-canvas,
-video{
+audio, canvas, video{
     display: inline-block;
     vertical-align: middle
 }
@@ -43,7 +40,6 @@ audio:not([controls]), [hidden], template{
 :root{
     box-sizing: border-box;
     -ms-overflow-style: -ms-autohiding-scrollbar;
-    font-family: sans-serif;
     -webkit-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
     text-size-adjust: 100%;
@@ -59,15 +55,11 @@ a{
     }
 }
 
-iframe,
-img,
-svg{
+iframe, img, svg{
     vertical-align: middle
 }
 
-iframe,
-embed,
-object{
+iframe, embed, object{
     max-width: 100%
 }
 
@@ -75,24 +67,11 @@ abbr[title]{
     border-bottom: 1px dotted
 }
 
-b,
-strong{
+b, strong{
     font-weight: bold
 }
 
-dfn{
-    font-style: italic
-}
-
-mark{
-    background: #ff0;
-    color: #000
-}
-
-code,
-kbd,
-pre,
-samp{
+code, pre{
     font-family: 'courier new', monospace, serif;
     font-size: 1em
 }
@@ -105,43 +84,12 @@ pre{
     margin: 1em 0
 }
 
-q{
-    quotes: none;
-    &:before, &:after{
-        content: '';
-        content: none;
-    }
-}
-
-sub,
-sup,
-small{
-    font-size: 75%
-}
-
-sub,
-sup{
-    position: relative;
-    vertical-align: baseline;
-    line-height: 0
-}
-
-sup{
-    top: -.5em
-}
-
-sub{
-    bottom: -.25em
-}
-
-nav ul,
-nav ol{
-    list-style: none;
-    list-style-image: none
+nav ul, nav ol{
+    list-style: none
 }
 
 img{
-    border: 0; 
+    border: 0;
     -ms-interpolation-mode: bicubic
 }
 
@@ -149,8 +97,7 @@ svg:not(:root){
     overflow: hidden
 }
 
-fieldset,
-legend{
+fieldset, legend{
     border: 0
 }
 
@@ -159,9 +106,7 @@ legend{
 }
 
 button,
-html input[type=button], 
-input[type=reset],
-input[type=submit]{
+input[type=button], input[type=reset], input[type=submit]{
     -moz-appearance: button;
     -webkit-appearance: button;
     cursor: pointer
@@ -171,15 +116,11 @@ select{
     cursor: pointer
 }
 
-button[disabled],
-input[disabled]{
+button[disabled], input[disabled]{
     cursor: default
 }
 
-button,
-input,
-select,
-textarea{
+button, input, select, textarea{
     vertical-align: baseline;
     font-family: inherit;
     font-size: 100%;
@@ -199,8 +140,7 @@ input{
     }
 }
 
-button,
-input{
+button, input:not([type=checkbox]):not([type=radio]){
     line-height: normal;
     -moz-appearance: none;
     -webkit-appearance: none;
@@ -220,26 +160,15 @@ textarea{
 
 table{
     border-collapse: collapse;
-    border-spacing: 0
+    border-spacing: 0;
+    table-layout: fixed
 }
 
 progress{
     display:inline-block
 }
 
-[unselectable]{
-    .user-select(none);
-}
-
-dl,
 menu{
-    margin: 1em 0
-}
-
-dd{
-    margin: 0 0 0 40px
-}
-
-menu{
+    margin: 1em 0;
     padding: 0 0 0 40px
 }
