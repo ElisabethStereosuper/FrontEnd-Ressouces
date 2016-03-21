@@ -1,4 +1,4 @@
-<?php 
+<?php
 define( 'SUPER_VERSION', 1.0 );
 
 /*-----------------------------------------------------------------------------------*/
@@ -39,7 +39,7 @@ remove_action('wp_head', 'wp_oembed_add_discovery_links');
 // remove comment author class
 function remove_comment_author_class( $classes ){
 	foreach( $classes as $key => $class ){
-		if(strstr($class, "comment-author-")) 
+		if(strstr($class, "comment-author-"))
 			unset( $classes[$key] );
 	}
 	return $classes;
@@ -91,9 +91,9 @@ add_filter('tiny_mce_before_init', 'super_mce_before_init');
 /* Menus
 /*-----------------------------------------------------------------------------------*/
 
-register_nav_menus( 
+register_nav_menus(
 	array(
-		'primary' => 'Primary Menu', 
+		'primary' => 'Primary Menu',
 	)
 );
 
@@ -108,17 +108,17 @@ add_filter('nav_menu_css_class', 'css_attributes_filter');
 /* Activate sidebar for Wordpress use
 /*-----------------------------------------------------------------------------------*/
 function super_register_sidebars() {
-	register_sidebar(array(				
-		'id' => 'sidebar', 					
-		'name' => 'Sidebar',				
-		'description' => 'Take it on the side...', 
-		'before_widget' => '',	
-		'after_widget' => '',	
-		'before_title' => '',	
-		'after_title' => '',		
+	register_sidebar(array(
+		'id' => 'sidebar',
+		'name' => 'Sidebar',
+		'description' => 'Take it on the side...',
+		'before_widget' => '',
+		'after_widget' => '',
+		'before_title' => '',
+		'after_title' => '',
 		'empty_title'=> ''
 	));
-} 
+}
 add_action( 'widgets_init', 'super_register_sidebars' );
 
 
@@ -126,14 +126,14 @@ add_action( 'widgets_init', 'super_register_sidebars' );
 /* Enqueue Styles and Scripts
 /*-----------------------------------------------------------------------------------*/
 
-function super_scripts()  { 
+function super_scripts()  {
 		// header
 		wp_enqueue_style( 'super-style', get_template_directory_uri() . '/css/style.css', array(), SUPER_VERSION );
 		wp_enqueue_script( 'super-modernizr', get_template_directory_uri() . '/js/modernizr-min.js', array(), null);
-		
+
 		// footer
 	    wp_deregister_script('jquery');
 		wp_enqueue_script( 'jquery', get_template_directory_uri() . '/js/jquery-1.11.1.min.js', array(), null, true );
-  
+
 }
 add_action( 'wp_enqueue_scripts', 'super_scripts' );
