@@ -106,13 +106,6 @@ legend{
     white-space: normal
 }
 
-button,
-input[type=button], input[type=reset], input[type=submit]{
-    -moz-appearance: button;
-    -webkit-appearance: button;
-    cursor: pointer
-}
-
 select{
     cursor: pointer
 }
@@ -129,24 +122,38 @@ button, input, select, textarea{
     margin: 0
 }
 
+button,
+input[type=button], input[type=reset], input[type=submit]{
+    appearance: button;
+    -moz-appearance: button;
+    -webkit-appearance: button;
+    cursor: pointer
+}
+
 input{
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    &::-moz-focus-inner{
+        border: 0;
+        padding: 0
+    }
     &[type=checkbox], &[type=radio]{
         cursor: pointer;
+    }
+    &[type=checkbox]{
+        -moz-appearance: checkbox;
+        -webkit-appearance: checkbox;
+    }
+    &[type=radio]{
+        -moz-appearance: radio;
+        -webkit-appearance: radio;
     }
     &[type=number]{
         width: auto;
         &::-webkit-outer-spin-button, &::-webkit-inner-spin-button{
             height: auto;
         }
-    }
-}
-
-button, input:not([type=checkbox]):not([type=radio]){
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    &::-moz-focus-inner{
-        border: 0;
-        padding: 0
     }
 }
 
