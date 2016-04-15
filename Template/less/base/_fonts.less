@@ -1,0 +1,15 @@
+@font: 'font', sans-serif;
+
+@font-face{
+    font-family: 'font';
+    src: url('../fonts/font.woff2') format('woff2'),
+         url('../fonts/font.woff') format('woff'),
+         url('../fonts/font.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+.font(@size){
+    font-family: @font;
+    font-size: @size;
+}

@@ -1,0 +1,185 @@
+/******* GÉNÉRAL *******/
+
+::-moz-selection{
+    background: #000;
+    color: #fff;
+    text-shadow: none;
+}
+::selection{
+    background: #000;
+    color: #fff;
+    text-shadow: none;
+}
+
+html{
+    font-size: 62.5%; /* sets the base font to 10px for easier math */
+}
+
+body{
+    font-family: sans-serif;
+    font-size: 1.6em;
+    /* sets the default sizing to make sure nothing is actually 16px */
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+h1{
+    font-size: 3em;
+    margin: .67em 0;
+}
+
+h2{
+    font-size: 2.5em;
+    margin: .83em 0;
+}
+
+h3{
+    font-size: 2em;
+    margin: 1em 0;
+}
+
+h4{
+    font-size: 1.7em;
+    margin: 1.33em 0;
+}
+
+h5{
+    font-size: 1.3em;
+    margin: 1.67em 0;
+}
+
+h6{
+    font-size: 1.1em;
+    margin: 2.33em 0;
+}
+
+p{
+    margin: 1em 0;
+}
+
+b, strong{
+
+}
+
+i, em{
+
+}
+
+blockquote{
+    margin: 1em 40px;
+}
+
+ol, ul{
+    margin: 1em 0;
+    padding: 0 0 0 40px;
+}
+
+img{
+    max-width: 100%;
+    height: auto;
+}
+
+code, pre{
+    display: block;
+    padding: 10px 15px;
+    margin: 1em 0;
+    background: @grey;
+}
+
+
+/******* LIENS / BOUTONS *******/
+
+a{
+    text-decoration: none;
+    transition: @transition;
+    &:focus, &:hover{
+    }
+    &:focus{
+        outline: 0;
+    }
+    &:active{
+    }
+}
+
+
+/******* FORMULAIRES *******/
+
+::-webkit-input-placeholder{
+    color: #8b8b8b;
+}
+::-moz-placeholder{
+    color: #8b8b8b;
+}
+::-ms-input-placeholder{
+    color: #8b8b8b;
+}
+
+label{
+
+}
+
+fieldset{
+
+}
+
+input, textarea, select, button{
+  transition: @transition;
+  &:focus{
+      outline: 0;
+  }
+}
+
+input, textarea{
+  &::-webkit-autofill{
+      box-shadow: 0 0 0 1000px #fff inset;
+  }
+}
+
+input{
+
+}
+
+textarea{
+
+}
+
+select{
+    // hide the arrow on edge + ie
+    &::-ms-expand{
+        display: none;
+    }
+}
+
+
+/******* CLASSES GENERALES  *******/
+
+.align-center{
+    text-align: center;
+}
+.align-left{
+    text-align: left;
+}
+.align-right{
+    text-align: right;
+}
+
+.reset-list{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.hidden{
+    display: none !important;
+}
+
+.clearfix{
+    &:before, &:after{
+        content: ' ';
+        display: table;
+    }
+    &:after{
+        clear: both;
+    }
+}

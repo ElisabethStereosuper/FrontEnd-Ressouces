@@ -107,11 +107,17 @@ legend{
 }
 
 select{
-    cursor: pointer
+    cursor: pointer;
+    &::-moz-focusring{
+        color: transparent;
+        text-shadow: 0 0 0 #000;
+    }
 }
 
-button[disabled], input[disabled]{
-    cursor: default
+button, input{
+    &[disabled]{
+        cursor: default
+    }
 }
 
 button, input, select, textarea{
@@ -120,14 +126,6 @@ button, input, select, textarea{
     background: none;
     border-radius: 0;
     margin: 0
-}
-
-button,
-input[type=button], input[type=reset], input[type=submit]{
-    appearance: button;
-    -moz-appearance: button;
-    -webkit-appearance: button;
-    cursor: pointer
 }
 
 input{
@@ -155,6 +153,14 @@ input{
             height: auto;
         }
     }
+}
+
+button,
+input[type=button], input[type=reset], input[type=submit]{
+    appearance: button;
+    -moz-appearance: button;
+    -webkit-appearance: button;
+    cursor: pointer
 }
 
 textarea{
