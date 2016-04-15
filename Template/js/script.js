@@ -1,8 +1,10 @@
-/**** VARIABLES ****/
-
-
-/**** INIT ****/
 $(function(){
+
+    /**** VARIABLES ****/
+
+
+    /**** INIT ****/
+
 
     $(document).scroll(function(){
     });
