@@ -8,17 +8,19 @@ header,
 nav,
 section,
 summary,
+menu,
 main{
     display: block
 }
 
-audio, canvas, video{
+audio, canvas, video, progress{
     display: inline-block;
     vertical-align: middle
 }
 
 audio:not([controls]), [hidden], template{
-    display: none
+    display: none;
+    height: 0;
 }
 
 *{
@@ -64,7 +66,9 @@ iframe, embed, object{
 }
 
 abbr[title]{
-    border-bottom: 1px dotted
+    border-bottom: none;
+    text-decoration: underline;
+    text-decoration: underline dotted;
 }
 
 b, strong{
@@ -72,9 +76,9 @@ b, strong{
     font-weight: bolder;
 }
 
-code, pre{
-    font-family: 'courier new', monospace, serif;
-    font-size: 1em
+code, kbd, pre, samp {
+  font-family: monospace, monospace;
+  font-size: 1em;
 }
 
 pre{
@@ -103,7 +107,11 @@ fieldset, legend{
 }
 
 legend{
-    white-space: normal
+    white-space: normal;
+    color: inherit;
+    display: table;
+    max-width: 100%;
+    padding: 0;
 }
 
 select{
@@ -118,6 +126,10 @@ button, input{
     &[disabled]{
         cursor: default
     }
+    &::-moz-focus-inner{
+        border: 0;
+        padding: 0;
+    }
 }
 
 button, input, select, textarea{
@@ -126,6 +138,10 @@ button, input, select, textarea{
     background: none;
     border-radius: 0;
     margin: 0
+}
+
+button, input, select {
+  overflow: visible;
 }
 
 input{
@@ -138,6 +154,7 @@ input{
     }
     &[type=checkbox], &[type=radio]{
         cursor: pointer;
+        padding: 0;
     }
     &[type=checkbox]{
         -moz-appearance: checkbox;
