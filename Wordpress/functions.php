@@ -45,7 +45,7 @@ add_action('pre_get_posts','search_filter');
 /*-----------------------------------------------------------------------------------*/
 /* Custom Post Types => Custom
 /*-----------------------------------------------------------------------------------*/
-function create_post_type() { 
+function create_post_type() {
   register_post_type('custom', array(
     'label' => 'Customs',
     'singular_label' => 'Custom',
@@ -75,6 +75,7 @@ function set_archive_number_posts( $query ){
     }
 }
 add_action( 'pre_get_posts', 'set_archive_number_posts', 1 );
+
 /*-----------------------------------------------------------------------------------*/
 /* Custom ACF widgets
 /*-----------------------------------------------------------------------------------*/
@@ -101,7 +102,7 @@ register_widget('Img_Widget');
 
 /*-----------------------------------------------------------------------------------*/
 /* Nouvelle taille d'image
-/*-----------------------------------------------------------------------------------*/ 
+/*-----------------------------------------------------------------------------------*/
 function myproject_thumbnail_sizes() {
     add_image_size( 'teacher-thumb', 220, 220, true );
 }
@@ -125,7 +126,7 @@ if(!function_exists('avignon_button')){
     }
 }
 add_filter( 'mce_buttons_2', 'avignon_button' );
- 
+
 if(!function_exists('avignon_mce_before_init')){
     function avignon_mce_before_init( $styles ) {
         $style_formats = array (
@@ -173,6 +174,13 @@ function add_right_now_custom_post() {
 }
 add_action('dashboard_glance_items', 'add_right_now_custom_post');
 
+// Show parent-child relationship for categories in the wordpress admin
+function taxonomy_relationship($args){
+    $args['checked_ontop'] = false;
+    return $args;
+}
+add_filter('wp_terms_checklist_args', 'taxonomy_relationship');
+
 /*-----------------------------------------------------------------------------------*/
 /* Add a class to Prev and Next posts links
 /*-----------------------------------------------------------------------------------*/
@@ -200,7 +208,7 @@ add_shortcode( 'new', 'new_shortcode' );
 /*-----------------------------------------------------------------------------------*/
 function custom_wp_trim_excerpt($wpse_excerpt) {
     $raw_excerpt = $wpse_excerpt;
-    
+
     if( '' == $wpse_excerpt ){
         $wpse_excerpt = get_the_content('');
         $wpse_excerpt = strip_shortcodes( $wpse_excerpt );
@@ -208,14 +216,14 @@ function custom_wp_trim_excerpt($wpse_excerpt) {
         $wpse_excerpt = str_replace(']]>', ']]&gt;', $wpse_excerpt);
         $wpse_excerpt = strip_tags($wpse_excerpt, '<em>,<i>,<a>,<strong>,<b>');
 
-        $excerpt_length = apply_filters('excerpt_length', 58); 
+        $excerpt_length = apply_filters('excerpt_length', 58);
         $tokens = array();
         $excerptOutput = '';
         $count = 0;
 
         preg_match_all('/(<[^>]+>|[^<>\s]+)\s*/u', $wpse_excerpt, $tokens);
 
-        foreach($tokens[0] as $token){ 
+        foreach($tokens[0] as $token){
 
             if($count >= $excerpt_length /*&& preg_match('/[\,\;\?\.\!]\s*$/uS', $token)*/){ //pour arreter l'extrait a un point ou une virgule, etc
                 $excerptOutput .= trim($token);
@@ -228,18 +236,18 @@ function custom_wp_trim_excerpt($wpse_excerpt) {
 
         $wpse_excerpt = trim(force_balance_tags($excerptOutput));
 
-        $excerpt_end = ' <a href="'. get_the_permalink() .'" class="lienVert" title="'. __('Lire', 'wisembly') . ' ' . get_the_title() .'">...'. __('Lire la suite', 'wisembly') .'</a>'; 
-        $excerpt_more = apply_filters('excerpt_more', ' ' . $excerpt_end); 
+        $excerpt_end = ' <a href="'. get_the_permalink() .'" class="lienVert" title="'. __('Lire', 'wisembly') . ' ' . get_the_title() .'">...'. __('Lire la suite', 'wisembly') .'</a>';
+        $excerpt_more = apply_filters('excerpt_more', ' ' . $excerpt_end);
         $wpse_excerpt .= $excerpt_more;
 
-        return $wpse_excerpt;   
+        return $wpse_excerpt;
 
     }
     return apply_filters('custom_wp_trim_excerpt', $wpse_excerpt, $raw_excerpt);
 }
 
 remove_filter('get_the_excerpt', 'wp_trim_excerpt');
-add_filter('get_the_excerpt', 'custom_wp_trim_excerpt'); 
+add_filter('get_the_excerpt', 'custom_wp_trim_excerpt');
 
 /*-----------------------------------------------------------------------------------*/
 /* Remove default WYSIWYG editor in Custom
@@ -250,7 +258,7 @@ function hide_editor() {
     }
     if( !isset( $post_id ) ) return;
     $template_file = get_post_meta($post_id, '_wp_page_template', true);
-    
+
     if($template_file == 'custom.php'){
         remove_post_type_support('page', 'editor');
     }
@@ -342,10 +350,10 @@ define('ICL_DONT_LOAD_LANGUAGES_JS', true);
 /* Enqueue Styles and Scripts
 /*-----------------------------------------------------------------------------------*/
 
-function mysascredit_scripts()  { 
+function mysascredit_scripts()  {
 	// header
 	wp_enqueue_style( 'myprojectname-style', get_template_directory_uri() . '/css/style.css', array(), MYPROJECTNAME_VERSION );
-	
+
 	// footer
     wp_deregister_script('jquery');
 	wp_enqueue_script( 'jquery', get_template_directory_uri() . '/js/jquery-1.11.1.min.js', array(), null, true );
