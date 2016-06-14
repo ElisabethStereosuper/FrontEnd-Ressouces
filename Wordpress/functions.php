@@ -45,15 +45,19 @@ add_action('pre_get_posts','search_filter');
 /*-----------------------------------------------------------------------------------*/
 /* Custom Post Types => Custom
 /*-----------------------------------------------------------------------------------*/
-function create_post_type() {
+function create_post_type(){
   register_post_type('custom', array(
     'label' => 'Customs',
+    'labels' => array(
+        'singular_name' => 'Custom stuff',
+        'menu_name' => 'Custom'
+    ),
     'singular_label' => 'Custom',
     'public' => true,
     'publicly_queryable' => false,
     'query_var' => false,
     'menu_icon' => 'dashicons-calendar-alt',
-    'supports' => array('title', 'editor', 'thumbnail')
+    'supports' => array('title', 'editor', 'thumbnail', 'excerpt', 'revisions')
   ));
 }
 add_action( 'init', 'create_post_type' );
@@ -62,10 +66,35 @@ function create_taxonomy(){
   register_taxonomy('cats', array('custom'), array(
     'hierarchical' => true,
     'label' => 'Cats',
-    'singular_label' => 'Cat'
+    'singular_label' => 'Cat',
+    'show_admin_column' => true
   ));
 }
 add_action( 'init', 'create_taxonomy' );
+
+// Define a page as the parent of post type
+function super_save_custom_post_parent($data, $postarr){
+    if( $postarr['post_type'] === 'custom' ){
+        $data['post_parent'] = CUSTOM_PAGE_ID;
+    }
+
+    return $data;
+}
+add_action( 'wp_insert_post_data', 'super_save_custom_post_parent', '99', 2 );
+
+// Define a page as the parent of post type in the menu
+function super_correct_menu_parent_class($classes, $item){
+    global $post;
+    if(!$post) return $classes;
+
+    $postType = get_post_type();
+    if($postType == 'custom'){
+        $item->object_id == $post->post_parent ? $classes[] = 'current_page_parent' : $classes = [];
+    }
+
+    return $classes;
+}
+add_filter( 'nav_menu_css_class', 'super_correct_menu_parent_class', 10, 2 );
 
 /* Override posts per page settings */
 function set_archive_number_posts( $query ){
