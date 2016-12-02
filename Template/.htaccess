@@ -86,6 +86,7 @@ Header set Cache-Control "max-age=7200, must-revalidate"
 <filesmatch "\.(pl|php|cgi|spl|scgi|fcgi)$">
 Header unset Cache-Control
 </filesmatch>
+
 # disallow site to be in iframe or clickjacking attack
 Header always set X-FRAME-OPTIONS SAMEORIGIN
 # disallow mime-type sniffing

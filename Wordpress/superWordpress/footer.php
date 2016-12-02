@@ -1,7 +1,7 @@
-	<footer role="contentinfo">
-	</footer>
+        <footer role='contentinfo'>
+        </footer>
 
-	<?php wp_footer(); ?>
+        <?php wp_footer(); ?>
 
-	</body>
-</html>
+        </body>
+    </html>
