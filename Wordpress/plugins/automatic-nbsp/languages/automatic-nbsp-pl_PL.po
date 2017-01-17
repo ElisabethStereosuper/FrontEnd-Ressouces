@@ -1,0 +1,166 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Automatic NBSP\n"
+"POT-Creation-Date: 2016-01-28 19:13+0100\n"
+"PO-Revision-Date: 2016-01-28 19:14+0100\n"
+"Last-Translator: \n"
+"Language-Team: Damian Góra <biuro@webtroter.pl>\n"
+"Language: pl_PL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.7.5\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2);\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../includes/admin-menu.php:9
+msgid "Automatic NBSP options"
+msgstr "Automatic NBSP - opcje"
+
+#: ../includes/admin-menu.php:9
+msgid "Automatic NBSP"
+msgstr "Automatic NBSP"
+
+#: ../includes/functions.php:197
+msgid "English"
+msgstr "Język angielski"
+
+#: ../includes/functions.php:265
+msgid "Polish"
+msgstr "Język polski"
+
+#: ../includes/settings/register-settings.php:63
+msgid "Automatic NBSP settings"
+msgstr "Automatic NBSP - opcje"
+
+#: ../includes/settings/register-settings.php:68
+msgid "Words or phrases: <br /> Each word or phrase on a new line"
+msgstr "Słowa lub frazy: <br /> Każde słowo w nowej linii"
+
+#: ../includes/settings/register-settings.php:69
+msgid "Add <code>&#38;nbsp</code> after each word or phrase from the list."
+msgstr "Dodaje <code>&#38;nbsp</code>po każdym słowie lub frazie z listy."
+
+#: ../includes/settings/register-settings.php:75
+msgid "Case sensitive"
+msgstr "Wielkość liter"
+
+#: ../includes/settings/register-settings.php:76
+msgid ""
+"If enabled, you need to type variants of word manually. For example: 'and', "
+"'AND', 'And' etc."
+msgstr "Uwzględnia wielkość liter. "
+
+#: ../includes/settings/register-settings.php:82
+msgid "Punctuation marks"
+msgstr "Reguły francuskie"
+
+#: ../includes/settings/register-settings.php:83
+msgid "Add <code>&amp;nbsp;</code> before punctuation marks as"
+msgstr "Dodaje <code>&amp;nbsp;</code> przed znakami: "
+
+#: ../includes/settings/register-settings.php:92
+#: ../includes/settings/register-settings.php:203
+msgid "Scope"
+msgstr "Zasięg działania"
+
+#: ../includes/settings/register-settings.php:97
+msgid "Content"
+msgstr "Treść"
+
+#: ../includes/settings/register-settings.php:98
+msgid "Add non-breaking spaces to contents"
+msgstr "Zezwala na dodawanie twardych spacji w treści postów, stron itp."
+
+#: ../includes/settings/register-settings.php:104
+msgid "Title"
+msgstr "Tytuł"
+
+#: ../includes/settings/register-settings.php:105
+msgid "Add non-breaking spaces to titles"
+msgstr "Zezwala na dodawanie twardych spacji w tytułach"
+
+#: ../includes/settings/register-settings.php:111
+msgid "Excerpt"
+msgstr "Zajawka"
+
+#: ../includes/settings/register-settings.php:112
+msgid "Add non-breaking spaces to excerpts"
+msgstr "Zezwala na dodawanie twardych spacji w zajawkach"
+
+#: ../includes/settings/register-settings.php:118
+msgid "Comment text"
+msgstr "Komentarze"
+
+#: ../includes/settings/register-settings.php:119
+msgid "Add non-breaking spaces to comments"
+msgstr "Zezwala na dodawanie twardych spacji w komentarzach"
+
+#: ../includes/settings/register-settings.php:125
+msgid "Widget text"
+msgstr "Widgety"
+
+#: ../includes/settings/register-settings.php:126
+msgid "Add non-breaking spaces to widgets"
+msgstr "Zezwala na dodawanie twardych spacji w widgetach"
+
+#: ../includes/settings/register-settings.php:132
+msgid "Advanced Custom Fields"
+msgstr "Advanced Custom Fields"
+
+#: ../includes/settings/register-settings.php:133
+msgid ""
+"Add non-breaking spaces to the ACF field types like: text, textarea and "
+"wysiwyg"
+msgstr "Dodaj twardą spację do pól ACF takich jak: text, textarea and wysiwyg"
+
+#: ../includes/settings/register-settings.php:139
+msgid "Custom"
+msgstr "Dowolny"
+
+#: ../includes/settings/register-settings.php:140
+msgid ""
+"Use <code>&lt;?php auto_nbsp($content); ?&gt;</code> to print the custom "
+"text with the automatic <code>&amp;nbsp;</code>. Use <code>&lt;?php "
+"auto_nbsp($content, false); ?&gt;</code> to only return."
+msgstr ""
+"Użyj funkcji <code>&lt;?php auto_nbsp($content); ?&gt;</code>aby "
+"automatycznie dodać do tekstu <code>&amp;nbsp;</code>. Aby tylko zwrócić "
+"dane ustaw false w drugim parametrze <code>&lt;?php auto_nbsp($content, "
+"false); ?&gt;</code>."
+
+#: ../includes/settings/register-settings.php:200
+msgid "General"
+msgstr "Główne"
+
+#: ../includes/settings/register-settings.php:306
+#, php-format
+msgid "Missing function callback <strong>%s</strong>"
+msgstr "Brak funkcji zwrotnej <strong>%s</strong>"
+
+#: ../includes/settings/settings-view.php:51
+msgid "Import words"
+msgstr "Importuj frazy"
+
+#: ../includes/settings/settings-view.php:68
+msgid "Import"
+msgstr "Import"
+
+#~ msgid "Keep numbers together"
+#~ msgstr "Trzymać liczby razem"
+
+#~ msgid ""
+#~ "Replace <code>299 792 458 m/s</code> on <code>299&amp;nbsp;792&amp;"
+#~ "nbsp;458&amp;nbsp;m/s</code> or <code>320 km/h</code> on <code>320&amp;"
+#~ "nbsp;km/h</code>"
+#~ msgstr ""
+#~ "Zamienia <code>299 792 458 m/s</code> na <code>299&amp;nbsp;792&amp;"
+#~ "nbsp;458&amp;nbsp;m/s</code> lub <code>320 km/h</code> na <code>320&amp;"
+#~ "nbsp;km/h</code>"
+
+#~ msgid ""
+#~ "For each word or phrase will be added a non-breaking space - HTML entity"
+#~ msgstr "Do każdego słowa lub wyrażenia zostanie dodana twarda spacja"
