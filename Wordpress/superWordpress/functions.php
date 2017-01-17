@@ -12,6 +12,7 @@ add_filter( 'auto_update_plugin', '__return_true' );
 // Theme support
 add_theme_support( 'html5', array('comment-list', 'comment-form', 'search-form', 'gallery', 'caption', 'widgets') );
 add_theme_support( 'post-thumbnails' );
+add_theme_support( 'title-tag' );
 
 // Admin bar
 show_admin_bar(false);
@@ -169,12 +170,11 @@ add_action( 'widgets_init', 'super_unregister_default_widgets' );
 /*-----------------------------------------------------------------------------------*/
 function super_scripts(){
     // header
-	wp_enqueue_style( 'super-style', get_template_directory_uri() . '/css/style.css', array(), SUPER_VERSION );
-	wp_enqueue_script( 'super-modernizr', get_template_directory_uri() . '/js/modernizr-min.js', array(), null);
+	wp_enqueue_style( 'think-style', get_template_directory_uri() . '/css/main.css', array(), SUPER_VERSION );
 
 	// footer
 	wp_deregister_script('jquery');
-	wp_enqueue_script( 'jquery', get_template_directory_uri() . '/js/jquery-1.11.1.min.js', array(), null, true );
+	wp_enqueue_script( 'think-scripts', get_template_directory_uri() . '/js/main.js', array(), null, true );
 
     wp_deregister_script( 'wp-embed' );
 }

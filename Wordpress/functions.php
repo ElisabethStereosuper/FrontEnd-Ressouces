@@ -35,12 +35,61 @@ add_filter('page_css_class', 'css_attributes_filter', 10, 3);
 /*-----------------------------------------------------------------------------------*/
 /* Résultats de recherche: uniquement des articles
 /*-----------------------------------------------------------------------------------*/
-function search_filter($query) {
-  if($query->is_main_query() && $query->is_search){
-    $query->set('post_type', 'post');
-  }
+function search_filter($query){
+    if(/*$query->is_main_query() && */$query->is_search){
+        $query->set('post_type', 'post');
+    }
+    return $query;
 }
-add_action('pre_get_posts','search_filter');
+add_filter( 'pre_get_posts', 'search_filter' );
+
+// Limit title lenth
+function think_title_length( $title ){
+    $max = 92;
+    if( strlen($title) > $max ){
+        // return substr( $title, 0, $max ) . " &hellip;";
+        return explode("\n", wordwrap($title, $max))[0] . " &hellip;";
+    }else{
+        return $title;
+    }
+}
+
+// Comments form error
+function think_die_handler($message, $title='', $args=array()){
+    if(empty($_POST['errorcomment'])){
+        $_POST['errorcomment'] = $message;
+    }
+
+    if(!session_id()){
+        session_start();
+    }
+
+    $_SESSION = $_POST;
+    session_write_close();
+
+    $url = strtok(wp_get_referer(), '?');
+    header('Location: ' . $url . '?error=true#commentform');
+    die();
+}
+function get_think_die_handler(){
+    return 'think_die_handler';
+}
+add_filter('wp_die_handler', 'get_think_die_handler');
+// + in header.php :
+// if(!session_id()){
+//     session_start();
+// }
+
+// $_POST = $_SESSION;
+// global $errorComment;
+// $errorComment = isset($_POST['errorcomment']) ? $_POST['errorcomment'] : false;
+
+// if(!isset($_GET['error'])){
+//     if($errorComment){
+//         $_POST['errorcomment'] = false;
+//     }
+//     session_destroy();
+// }
 
 /*-----------------------------------------------------------------------------------*/
 /* Custom Post Types => Custom
@@ -146,6 +195,16 @@ function imagelink_setup() {
     if($image_set !== 'none'){ update_option('image_default_link_type', 'none'); }
 }
 add_action('admin_init', 'imagelink_setup', 10);
+
+// Remove the classes on images
+add_filter( 'get_image_tag_class', '__return_empty_string' );
+
+// Change markup images in content
+function think_insert_image($html, $id, $caption, $title, $align, $url) {
+    $html5 = '<div class="post-img align' . $align . '">' . $html . '</div>';
+    return $html5;
+}
+add_filter( 'image_send_to_editor', 'think_insert_image', 10, 9 );
 
 // New button wysiwyg
 if(!function_exists('avignon_button')){
@@ -277,22 +336,6 @@ function custom_wp_trim_excerpt($wpse_excerpt) {
 
 remove_filter('get_the_excerpt', 'wp_trim_excerpt');
 add_filter('get_the_excerpt', 'custom_wp_trim_excerpt');
-
-/*-----------------------------------------------------------------------------------*/
-/* Remove default WYSIWYG editor in Custom
-/*-----------------------------------------------------------------------------------*/
-function hide_editor() {
-	if(isset($_GET['post']) || isset($_POST['post_ID'])){
-    	$post_id = $_GET['post'] ? $_GET['post'] : $_POST['post_ID'] ;
-    }
-    if( !isset( $post_id ) ) return;
-    $template_file = get_post_meta($post_id, '_wp_page_template', true);
-
-    if($template_file == 'custom.php'){
-        remove_post_type_support('page', 'editor');
-    }
-}
-add_action( 'admin_init', 'hide_editor' );
 
 /*-----------------------------------------------------------------------------------*/
 /* Markup gallery
