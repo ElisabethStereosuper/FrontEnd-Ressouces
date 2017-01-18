@@ -134,7 +134,7 @@ Header always set X-FRAME-OPTIONS SAMEORIGIN
 Header always set X-Content-Type-Options "nosniff"
 
 # protection
-<FilesMatch "\.(htaccess|readme.txt|readme.html)$">
+<FilesMatch "\.(htaccess|wp-config.php|install.php|readme.txt|readme.html)$">
 	<IfModule mod_authz_core.c>
 		Require all denied
 	</IfModule>
@@ -143,6 +143,33 @@ Header always set X-Content-Type-Options "nosniff"
 		Deny from all
 	</IfModule>
 </FilesMatch>
+
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+	# Protect wp-includes
+	RewriteRule ^wp-admin/includes/ - [F]
+	RewriteRule !^wp-includes/ - [S=3]
+	RewriteCond %{SCRIPT_FILENAME} !^(.*)wp-includes/ms-files.php
+	RewriteRule ^wp-includes/[^/]+\.php$ - [F]
+	RewriteRule ^wp-includes/js/tinymce/langs/.+\.php - [F]
+	RewriteRule ^wp-includes/theme-compat/ - [F]
+	# Disable PHP in Uploads
+	RewriteRule ^wp\-content/uploads/.*\.(?:php[1-6]?|pht|phtml?)$ - [NC,F]
+	# Filter Request Methods
+	RewriteCond %{REQUEST_METHOD} ^(TRACE|DELETE|TRACK) [NC]
+	RewriteRule ^.* - [F]
+</IfModule>
+
+# Disable XML-RPC
+<files xmlrpc.php>
+	<IfModule mod_authz_core.c>
+		Require all denied
+	</IfModule>
+	<IfModule !mod_authz_core.c>
+		Order allow,deny
+		Deny from all
+	</IfModule>
+</files>
 
 # addType woff2
 AddType application/x-font-woff2 .woff2
@@ -157,3 +184,6 @@ ServerSignature Off
 AddType video/ogg ogg ogv
 AddType video/mp4 mp4
 AddType video/webm webm
+
+php_value upload_max_filesize 50M
+php_value post_max_size 50M
