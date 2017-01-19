@@ -82,11 +82,19 @@ function super_remove_p_around_images($content){
 add_filter( 'the_content', 'super_remove_p_around_images' );
 
 // Allow svg in media library
-function super_mime_types($mimes){
-    $mimes['svg'] = 'image/svg+xml';
-    return $mimes;
+// function super_mime_types($mimes){
+//     $mimes['svg'] = 'image/svg+xml';
+//     return $mimes;
+// }
+// add_filter( 'upload_mimes', 'super_mime_types' );
+function super_allow_svg($filetype_ext_data, $file, $filename, $mimes){
+    if( substr($filename, -4) === '.svg' ){
+        $filetype_ext_data['ext'] = 'svg';
+        $filetype_ext_data['type'] = 'image/svg+xml';
+    }
+    return $filetype_ext_data;
 }
-add_filter( 'upload_mimes', 'super_mime_types' );
+add_filter( 'wp_check_filetype_and_ext', 'super_allow_svg', 100, 4 );
 
 // Custom posts in the dashboard
 function super_right_now_custom_post() {
